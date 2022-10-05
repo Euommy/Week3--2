@@ -9,8 +9,10 @@ import path, {dirname} from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+// Import Router
+import indexRouter from './app/routes/index.route.server.js';
 
-// instantiate app-server
+// Instantiate app-server
 const app = express();
 
 // setup ViewEngine EJS
@@ -26,23 +28,23 @@ app.use(session({
     secret: 'MySecret',
     saveUninitialized: false,
     rersave: false
-}))
+}));
 
 // custom middleware
-function helloWorld(req, res, next){
-    res.setHeader('Content-Type','text/plain');
-    res.end('Hello World');
-};
+//function helloWorld(req, res, next){
+ //   res.setHeader('Content-Type','text/plain');
+ //   res.end('Hello World');
+//};
 
 // custom middleware
-function byeWorld(req, res, next){
-    res.setHeader('Content-Type','text/plain');
-    res.end('Good Bye World');
-};
+//function byeWorld(req, res, next){
+  //  res.setHeader('Content-Type','text/plain');
+  //  res.end('Good Bye World');
+//};
 
 // add middleware to connect application
-app.use('/hello',helloWorld);
-app.use('/bye', byeWorld);
+app.use('/', indexRouter);
+//app.use('/bye', byeWorld);
 
 // run app
 app.listen(3000);
