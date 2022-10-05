@@ -1,5 +1,5 @@
 // Third Party Modules
-import exprss from "express";
+import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import session from "express-session";
@@ -11,7 +11,22 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 
 // instantiate app-server
-const app = exprss();
+const app = express();
+
+// setup ViewEngine EJS
+app.set('views', path.join(__dirname,'/views'));
+app.set('view engine', 'ejs');
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false}));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(session({ 
+    secret: 'MySecret',
+    saveUninitialized: false,
+    rersave: false
+}))
 
 // custom middleware
 function helloWorld(req, res, next){
