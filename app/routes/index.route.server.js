@@ -1,6 +1,6 @@
 // index Routes
 import { Router } from 'express';
-import { displayHomePage, displayAboutPage, displayProjectsPage, displayServicesPage, displayContactPage } from '../controllers/index.controller.server.js';
+import { displayHomePage, displayAboutPage, displayProjectsPage, displayServicesPage, displayContactPage } from '../index.controller.server.js';
 
 // Instanciating the router
 const router = Router();
